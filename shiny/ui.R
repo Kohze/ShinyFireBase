@@ -13,10 +13,8 @@ shinyUI(fluidPage(
       actionButton("button", "create link"),
       br(),
       br(),
-      textOutput("link"),
       br(),
-      p(id = "element", ""),
-      textOutput("queryText")
+      p(id = "element", "")
     ),
 
     # Show a plot of the generated distribution
