@@ -13,7 +13,6 @@ Adding data to DB
 
 list --> serialize() --> base64_enc() --> toJSON --> FIREBASE 
 
-
 ```
 addToDB <- function(...){
   PUT(paste0(dbURL,path,".json"), body = toJSON(base64_enc(serialize(list(...), NULL))))
