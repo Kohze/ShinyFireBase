@@ -3,8 +3,8 @@ title: shinyFirebase
 account: frapbotbeta
 server: shinyapps.io
 appId: 167336
-bundleId: 764358
+bundleId: 765081
 url: https://frapbotbeta.shinyapps.io/shinyfirebase/
-when: 1490566445.35532
+when: 1490615565.52179
 asMultiple: FALSE
 asStatic: FALSE

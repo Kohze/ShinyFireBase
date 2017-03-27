@@ -3,7 +3,6 @@ library(httr)
 library(jsonlite)
 library(shiny)
 
-
 shinyDB <- function(){
   shiny::runApp()
 }
@@ -23,17 +22,16 @@ shinyServer(function(input, output, session) {
       path <- paste0("/shinyTest/", parseQueryString(session$clientData$url_search)[['DBpath']])
       fromDB("dataInput", "path" = path, "url" = dbURL)
     } else {
-    ### Change your input here (mtcars, USArrests etc.) - will be exposed more later.   
-    dataInput <<- USJudgeRatings
+      ### Change your input here (mtcars, USArrests etc.) - will be exposed more later.   
+      dataInput <<- USArrests
     }
    })
   
    #retrieving variables from firebase
   fromDB <- function(..., path, url){
     entries <- list(...)
-    dataJSON <- GET(paste0(url,path,".json"), content_type_json())
-    dataFrame <- (fromJSON(content(dataJSON,"text")))
-    #appending variables from firebase to shiny
+    dataJSON = GET(paste0(url,path,".json"), content_type_json())
+    dataFrame = unserialize(base64_dec(unlist(content(dataJSON))))
     for (i in 1:length(entries)) {
       list2env(dataFrame[entries[[i]]], envir = .GlobalEnv)
     }
@@ -41,7 +39,7 @@ shinyServer(function(input, output, session) {
   
   #adding content
   addToDB <- function(..., path){
-    PUT(paste0(dbURL,"/",paste0(path),".json"), body = toJSON(list(...)))
+    PUT(paste0(dbURL,path,".json"), body = toJSON(base64_enc(serialize(list(...), NULL))))
   }
   
   #ShinyJS activated button
@@ -50,7 +48,7 @@ shinyServer(function(input, output, session) {
     concPath <- paste0("/shinyTest/", path)
     addToDB("dataInput" = dataInput, "path" = concPath)
     #shinyJS syntax to modify <p> </p> element content
-    html("element", paste0("Link: ", "https://frapbotbeta.shinyapps.io/shinyfirebase/?DBpath=", toString(path)))
+    html("element", paste0("https://frapbotbeta.shinyapps.io/shinyfirebase/?DBpath=", toString(path)))
   })
   
   output$distPlot <- renderPlot({
