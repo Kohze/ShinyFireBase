@@ -1,8 +1,9 @@
 
 ### Shiny Firebase Data/Session Saving and Sharing
 
-this repo is an example how to share shiny application data in a quick and intuitive way. Once the user clicks on "create link", the defined variables are send to firebase and a link is generated.
-As those steps require to trigger a function on button click, and then a change of the link text, shinyJS is used extensivly. 
+this is an example how to share shiny application data in a quick and intuitive way. 
+
+Once the user clicks on "create link", the defined variables are send to firebase and a link is generated.
 
 --------------
 
@@ -10,7 +11,7 @@ As those steps require to trigger a function on button click, and then a change 
 
 #### Next Steps:
 
- - Firebase seems to reorder tables/lists alphabeticly, we have to prevent that (otherwise we have to call columns allways by names/identifiers)
+ - Firebase seems to reorder tables/lists alphabeticly, we have to prevent that
  - Refactoring functions to get them more efficient/compact. 
 
 
